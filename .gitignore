@@ -1,0 +1,10 @@
+.DS_Store
+
+# Temporary Matlab files
+*.m~
+
+# Audio files
+audio/
+
+# Image files
+img/
