@@ -8,11 +8,13 @@
     @param windowPointer - indicates the current window pointer
 %}
 function step(windowPtr)
-    % instruction step - wait for spacebar
-    % display_image('img/heart.jpg', windowPointer);
+    
+    % display_image('img/heart.jpg', windowPtr);
+    
     color = [0.4 0.4 0.4]; % darkGrey1
+  
+    % instruction step - wait for spacebar
     dialog_textmessage(windowPtr, 'Listen inside', color, Inf, KbName('space'));
-    Screen('Flip', windowPtr);
     
     % screen becomes black
     black_screen();
@@ -26,6 +28,8 @@ function step(windowPtr)
 
     % after x ms, show the sign to begein count.
     % (x is the time for the steady state to stabilize)
+    
+    % Enter results screen.
     
     % Clear the screen
     % sca;

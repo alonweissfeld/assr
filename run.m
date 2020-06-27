@@ -1,11 +1,13 @@
-% NOTE: Stop screen from being synced. Shuld be 0 for real experiment.
-Screen('Preference', 'SkipSyncTests', 1);
+% Defines the initial settings for opening a Psychtoolbox window.
+display.skipChecks = 1;
+display.bkColor = 0;
 
-% Initialize fullscreen
-[windowPointer, windowRectangle] = Screen('OpenWindow', 0, 0, [], [], 2);
-Priority(MaxPriority(windowPointer));
-
-% Set up alpha-blending for smooth (anti-aliased) lines
-Screen('BlendFunction', windowPointer, 'GL_SRC_ALPHA', 'GL_ONE_MINUS_SRC_ALPHA');
-
-step(windowPointer);
+try
+    display = open_window(display);
+    step(display.windowPtr);
+catch ME
+     Screen('CloseAll');
+     rethrow(ME);
+end
+Screen('CloseAll');
+    
