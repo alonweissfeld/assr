@@ -3,8 +3,5 @@
 # Temporary Matlab files
 *.m~
 
-# Audio files
-audio/
-
-# Image files
-img/
+# All asstets files (images, audio, etc.)
+assets/

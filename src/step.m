@@ -9,21 +9,21 @@
 %}
 function step(windowPtr)
     
-    % display_image('img/heart.jpg', windowPtr);
+    display_image('./assets/img/heart.jpg', windowPtr);
     
     color = [0.4 0.4 0.4]; % darkGrey1
   
     % instruction step - wait for spacebar
-    dialog_textmessage(windowPtr, 'Listen inside', color, Inf, KbName('space'));
+%     dialog_textmessage(windowPtr, 'Listen inside', color, Inf, KbName('space'));
     
     % screen becomes black
-    black_screen();
+%     black_screen();
     
     % delay of ~2sec
-    WaitSecs(2);
+%     WaitSecs(2);
 
     % start of audio
-    play_audio('volume-7.mp3');
+%     play_audio('volume-7.mp3');
     % (send to diodes?)
 
     % after x ms, show the sign to begein count.
@@ -33,5 +33,4 @@ function step(windowPtr)
     
     % Clear the screen
     % sca;
-    Screen('CloseAll');
 end
