@@ -13,7 +13,7 @@ function aborted = wait_keypress(waitingTime, varargin)
     end
 
     aborted = false;
-    waitTime = 0;
+    waitTime = 0; % (seconds)
     while waitTime < waitingTime
         % Check for any keypress
         [ keyIsDown, ~, kbKeycode ] = KbCheck;

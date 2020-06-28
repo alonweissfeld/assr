@@ -3,7 +3,7 @@ function display = open_window(params)
     Screen('Preference', 'SkipSyncTests', params.skipChecks);
     
     % Initialize fullscreen
-    [windowPtr, windowRect] = Screen('OpenWindow', 0, params.bkColor, [], [], 2);
+    [windowPtr, windowRect] = Screen('OpenWindow', 0, params.bkColor, params.resolution, [], 2);
     Priority(MaxPriority(windowPtr));
     
     % Set up alpha-blending for smooth (anti-aliased) lines
