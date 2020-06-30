@@ -7,19 +7,18 @@
     @param audioFile - indicates the path to the audio file
     @param windowPointer - indicates the current window pointer
 %}
-function step(display, sound)    
-    % display_image('./assets/img/heart.jpg', windowPtr);
-  
+function step(display, sound)
+    % Load the curent audio to buffer
+    load_audio_to_buffer(sound);
+
     % instruction step - wait for spacebar
     dialog_textmessage(display, 'Listen inside', Inf, KbName('space'));
     
     % screen becomes black for 2 seconds
     black_screen_wait(display, 2);
 
-    % Show sign to start counting
-
-    % start of audio
-    play_audio(sound.pahandle, './assets/audio/volume-7.mp3');
+    % Play audio
+    play_audio(sound.pahandle);
     % (send to diodes?)
 
     % after x ms, show the sign to begein count.
@@ -27,4 +26,7 @@ function step(display, sound)
     
     % Results screen
     result = get_number_input(display, 'Enter result: ');
+    
+    % Empty the audio buffer
+    empty_audio_from_buffer();
 end
