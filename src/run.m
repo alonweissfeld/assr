@@ -15,11 +15,10 @@ try
       
     step(display.windowPtr, sound. pahandle);
 catch ME
-    Screen('CloseAll');
-    PsychPortAudio('Close');
+    cleanup();
+    ple;
     rethrow(ME);
 end
 
-Screen('CloseAll');
-PsychPortAudio('Close');
+cleanup();
     
