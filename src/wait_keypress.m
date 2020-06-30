@@ -17,7 +17,7 @@ function aborted = wait_keypress(waitingTime, varargin)
     while waitTime < waitingTime
         % Check for any keypress
         [ keyIsDown, ~, kbKeycode ] = KbCheck;
-
+        
         if keyIsDown
            kbKeycode = find(kbKeycode, 1);
 
@@ -28,8 +28,8 @@ function aborted = wait_keypress(waitingTime, varargin)
             end
         end
 
-        waitTime = waitTime + 0.1;
-        WaitSecs(0.1);
+        waitTime = waitTime + 0.05;
+        WaitSecs(0.05);
     end
 
     % Empty keyboard queue

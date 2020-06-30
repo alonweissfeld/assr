@@ -10,8 +10,10 @@ function display = open_window(params)
     Screen('BlendFunction', windowPtr, 'GL_SRC_ALPHA', 'GL_ONE_MINUS_SRC_ALPHA');
     
     [xCenter, yCenter] = RectCenter(windowRect);
+    textSize = Screen('TextSize', windowPtr);
     
     display = params;
     display.center = [xCenter, yCenter];
+    display.textSize = textSize;
     display.windowPtr = windowPtr;
 end
