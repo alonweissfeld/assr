@@ -18,9 +18,7 @@ try
     audioFiles = read_all_audio_files(conf);
     
     % Extend the sound  and display structures with initialized Psychtoolxbox
-    % params for opening a  7
-     8
-     Screen window and an Audio-Port.
+    % params for opening a Screen window and an Audio-Port.
     sound = open_audio(sound); 
     display = open_window(display);  
     
