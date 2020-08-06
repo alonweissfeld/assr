@@ -1,21 +1,27 @@
 import sys
 import numpy as np
+from scipy import signal
 from scipy.io.wavfile import write
 
 SPS = 44100     # Samples per second
 RANGE = 32767   # Signed short int ranges from -32768 to +32767
 WAV_DIR = './stimuli'
-ATTENUATION_FACTOR = 0.5
+ATTENUATION_FACTOR = 0.3
+STEADY_STATE_FREQ = 40
+
+def generate_steadystate(duration):
+    """Generates the steady state modulation using a simple squre wave"""
+    samples = np.arange(duration * SPS)
+    interval = (2 * np.pi * STEADY_STATE_FREQ) / SPS
+
+    # Sample discrete sqaure values at each interval
+    # and normalize it to the [0,1] range.
+    sqaureWave = signal.square(interval * samples)
+    return 0.5 * sqaureWave + 0.5
 
 
-def generate(stimulus):
-    """
-    For a given frequency (cycles per second) and duration in seconds,
-    generates a simple sine wave and saves it to disk.
-    """
-    freq = stimulus.get('frequency')
-    duration = stimulus.get('duration')
-
+def generate_carrier(freq, duration, targets):
+    """Generates the carrier sine signal with specified targets"""
     samples = np.arange(duration * SPS)
     interval = (2 * np.pi * freq) / SPS
 
@@ -23,8 +29,26 @@ def generate(stimulus):
     waveform = np.sin(interval * samples)
 
     # Apply decrease in volume targets in the waveform
-    targets = stimulus.get('targets')
     create_targets(waveform, targets)
+
+    return waveform
+
+
+def generate(stimulus):
+    """
+    Generates an ASSR stimulus composed from a modulated carrier signal.
+    The modulation signal is usually around 30-50Hz as ti vibrates
+    the higher carrier frequeny, which is around the 500-600Hz.
+    """
+    freq = stimulus.get('frequency')
+    targets = stimulus.get('targets')
+    duration = stimulus.get('duration')
+
+    steadystate = generate_steadystate(duration)
+    carrier = generate_carrier(freq, duration, targets)
+
+    # Apply the modulation (steady state frequeny) on the carrier sine
+    waveform = np.multiply(carrier, steadystate)
 
     # Convert to sign 16-bit integers and attenuate the loud signal
     waveform = np.int16(waveform * ATTENUATION_FACTOR * RANGE)
@@ -49,11 +73,11 @@ def create_targets(waveform, targets):
 if __name__ == "__main__":
     stimulus = {
         'frequency': 500,
-        'duration': 10,
+        'duration': 5,
         'targets': {
-            'timings': [1, 4, 7],
-            'duration': 0.5,
-            'percentage': 0.6
+            'timings': [1, 3],
+            'duration': 0.3,
+            'percentage': 0.5
         }
     }
 
