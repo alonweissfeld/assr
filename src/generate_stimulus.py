@@ -6,8 +6,9 @@ from scipy.io.wavfile import write
 SPS = 44100     # Samples per second
 RANGE = 32767   # Signed short int ranges from -32768 to +32767
 WAV_DIR = './stimuli'
-ATTENUATION_FACTOR = 0.3
 STEADY_STATE_FREQ = 40
+ATTENUATION_FACTOR = 0.6
+
 
 def generate_steadystate(duration):
     """Generates the steady state modulation using a simple squre wave"""
